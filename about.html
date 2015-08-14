@@ -184,7 +184,24 @@ a:active {
 "use strict";
 
 document.addEventListener('DOMContentLoaded', function() {
-  console.log("the page has loaded")
+  document.getElementById('tab-group').className = 'ready';
+  /*
+  var tab1 = document.getElementById('tab-header-1'),
+      tab2 = document.getElementById('tab-header-2'),
+      tab3 = document.getElementById('tab-header-3');
+
+    tab1.addEventListener('click', activateTab);
+    tab2.addEventListener('click', activateTab);
+    tab3.addEventListener('click', activateTab);
+     */
+
+    var tabHeaders = document.getElementsByClassName('tab-header');
+      for (var i = 0; i < tabHeaders.length; i++) {
+            tabHeaders[i].addEventListener('click', activateTab);
+      }
+    function activateTab(event) {
+      console.log('you heard a click');
+    }
 });
 
 </script>
