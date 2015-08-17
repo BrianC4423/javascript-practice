@@ -114,6 +114,10 @@ a:active {
 	left: 18.5em;
 }
 
+.ready #tab-header-4 {
+	left: 23em;
+}
+
 .ready .tab-content {
 	display: none;
 }
@@ -160,6 +164,10 @@ a:active {
 <p>Sincerely,</p>
 <p>Maria Ann Vitalia &amp; the Entire Vitalia family </p>
 	</div>
+  <h3 class="tab-header" id="tab-header-4">The Future</h3>
+  <div class="tab-content" id="tab-content-4">
+  <p>The future is limitless!</p>
+  </div>
 	</div>
 
 <div id="leftSidePhoto2"><img src="images/Olive%20Oil_photoframe.jpg" width="400" height="289" alt="olives on branch" /></div>
@@ -195,24 +203,44 @@ document.addEventListener('DOMContentLoaded', function() {
     tab3.addEventListener('click', activateTab);
      */
 
-    var tabHeaders = document.getElementsByClassName('tab-header');
+    var headerClass = 'tab-header',
+        contentClass = 'tab-content';
+
+    document.getElementById('tab-group').addEventListener('click', function(event) {
+
+          var myHeader = event.target;
+
+          if (myHeader.className !== headerClass) {
+            return;
+          }
+
+          var myID = myHeader.id,
+              contentID = myID.replace('header', 'content');
+
+            deactivateAllTabs();
+
+            myHeader.className = headerClass + ' active';
+            document.getElementById(contentID).className = contentClass + ' active';
+        });
+
+    function deactivateAllTabs() {
+    /*  document.getElementById('tab-header-1').className = 'tab-header';
+      document.getElementById('tab-content-1').className = 'tab-content';
+      document.getElementById('tab-header-2').className = 'tab-header';
+      document.getElementById('tab-content-2').className = 'tab-content';
+      document.getElementById('tab-header-3').className = 'tab-header';
+      document.getElementById('tab-content-3').className = 'tab-content';
+      document.getElementById('tab-header-4').className = 'tab-header';
+      document.getElementById('tab-content-4').className = 'tab-content';
+    */
+      var tabHeaders = document.getElementsByClassName(headerClass),
+          tabContents = document.getElementsByClassName(contentClass);
+
       for (var i = 0; i < tabHeaders.length; i++) {
-            tabHeaders[i].addEventListener('click', activateTab);
+        tabHeaders[i].className = headerClass;
+        tabContents[i].className = contentClass;
       }
-    function activateTab(event) {
-      var myID = this.id,
-          contentID = myID.replace('header', 'content');
-        document.getElementById('tab-header-1').className = 'tab-header';
-        document.getElementById('tab-content-1').className = 'tab-content';
 
-        document.getElementById('tab-header-2').className = 'tab-header';
-        document.getElementById('tab-content-2').className = 'tab-content';
-
-        document.getElementById('tab-header-3').className = 'tab-header';
-        document.getElementById('tab-content-3').className = 'tab-content';
-
-        document.getElementById(myID).className = 'tab-header active';
-        document.getElementById(contentID).className = 'tab-content active';
 
     }
 });
